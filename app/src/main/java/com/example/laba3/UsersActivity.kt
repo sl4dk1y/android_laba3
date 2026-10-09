@@ -9,6 +9,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import android.widget.Toast
 
 class UsersActivity : AppCompatActivity() {
 
@@ -64,6 +65,24 @@ class UsersActivity : AppCompatActivity() {
 
             // Записываем событие в Logcat
             Log.d("Laba3", "Добавлен пользователь: $newUser")
+        }
+
+        val buttonDeleteUser = findViewById<Button>(R.id.buttonDeleteUser)
+
+        buttonDeleteUser.setOnClickListener {
+            if (usersAdapter.count > 0) {
+                val lastUser = usersAdapter.getItem(usersAdapter.count - 1)
+
+                usersAdapter.remove(lastUser)
+
+                Log.d("Laba3", "Удалён пользователь: $lastUser")
+            } else {
+                Toast.makeText(
+                    this,
+                    "Список пользователей пуст",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
     }
 }
